@@ -23,8 +23,14 @@ There're two parameters for initialize method:
 
 Then you can subscribe or unsubscribe from a list:
 
+* Note: list_id and email are required fields for both methods, while the subscribe method takes an optional name value and custom fields hash
+
 ```ruby
-> c.subscribe list_id, "foo@bar.com", "My Name"
+> c.subscribe list_id, "foo@bar.com", "My Name", {company: "My Company", members: 3}
+=> true
+> c.subscribe list_id, "foo@bar.com", nil, {company: "My Company", members: 3}
+=> true
+> c.subscribe list_id, "foo@bar.com"
 => true
 > c.unsubscribe list_id, "foo@bar.com"
 => false
