@@ -28,10 +28,17 @@ module Cindy
       response.body
     end
 
-    def subscribe(list_id, email, name = nil)
+    def subscribe(list_id, email, name = nil, custom_fields = {})
       response = connection.post "subscribe" do |req|
         params = {list: list_id, email: email, boolean: true}
         params[:name] = name if name
+
+        if custom_fields.present?
+          custom_fields.each do |key, value|
+            params[key] = value
+          end
+        end
+
         req.body = params
       end
 
